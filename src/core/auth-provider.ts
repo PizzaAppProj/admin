@@ -1,6 +1,12 @@
 import { apolloClient } from "@app/core/apollo-client";
-import { AdminLoginQuery, AdminLoginQueryVariables } from "@app/core/types";
+import {
+  AdimGetMeQuery,
+  AdminGetmeOutput,
+  AdminLoginQuery,
+  AdminLoginQueryVariables,
+} from "@app/core/types";
 import AdminLoginQueryGql from "@app/core/graphql/admin-login.gql";
+import AdminGetMeQueryGql from "@app/core/graphql/admin-get-me.gql";
 import { JWT_ADMIN_TOKEN } from "./constants";
 
 export const authProvider = {
@@ -32,10 +38,14 @@ export const authProvider = {
   checkError: (error: any) => {
     return Promise.resolve();
   },
-  getIdentity: () =>
-    Promise.resolve({
-      id: "user",
-      fullName: "John Doe",
-    }),
+  getIdentity: async () => {
+    const { data } = await apolloClient.query<AdimGetMeQuery>({
+      query: AdminGetMeQueryGql,
+    });
+    return Promise.resolve({
+      id: data.adminGetMe!.id,
+      fullName: data.adminGetMe!.username,
+    });
+  },
   getPermissions: () => Promise.resolve(""),
 };

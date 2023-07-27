@@ -1,0 +1,6 @@
+query AdimGetMe {
+  adminGetMe {
+    id
+    username
+  }
+}
