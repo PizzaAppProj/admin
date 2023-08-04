@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.17",
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.11.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@mui/material": "^5.14.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -16,6 +19,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "axios": "^1.4.0",
     "graphql": "^16.7.1",
     "ra-data-hasura": "^0.6.0",
     "ra-i18n-polyglot": "^4.12.2",
@@ -31,12 +35,15 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:storybook/recommended"
     ]
   },
   "browserslist": {
@@ -54,7 +61,22 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@storybook/addon-essentials": "7.1.1",
+    "@storybook/addon-interactions": "7.1.1",
+    "@storybook/addon-links": "7.1.1",
+    "@storybook/addon-onboarding": "1.0.8",
+    "@storybook/blocks": "7.1.1",
+    "@storybook/preset-create-react-app": "7.1.1",
+    "@storybook/react": "7.1.1",
+    "@storybook/react-webpack5": "7.1.1",
+    "@storybook/testing-library": "0.2.0",
+    "babel-plugin-named-exports-order": "0.0.2",
+    "eslint-plugin-storybook": "^0.6.13",
     "graphql-tag": "^2.12.6",
-    "react-app-alias": "^2.2.2"
+    "prop-types": "15.8.1",
+    "react-app-alias": "^2.2.2",
+    "storybook": "^7.1.1",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "webpack": "5.88.2"
   }
 }

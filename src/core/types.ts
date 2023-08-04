@@ -1,3 +1,5 @@
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -5,6 +7,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -40,6 +43,15 @@ export type AdminRegisterInput = {
 export type AdminRegisterOutput = {
   __typename?: 'AdminRegisterOutput';
   accessToken: Scalars['String']['output'];
+};
+
+export type CloudinarySignatureOutput = {
+  __typename?: 'CloudinarySignatureOutput';
+  apiKey: Scalars['String']['output'];
+  cloudName: Scalars['String']['output'];
+  publicId: Scalars['String']['output'];
+  signature: Scalars['String']['output'];
+  timestamp: Scalars['Int']['output'];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -660,6 +672,7 @@ export type Query_Root = {
   admin_aggregate: Admin_Aggregate;
   /** fetch data from the table: "admin" using primary key columns */
   admin_by_pk?: Maybe<Admin>;
+  cloudinarySignature?: Maybe<CloudinarySignatureOutput>;
   /** fetch data from the table: "menu" */
   menu: Array<Menu>;
   /** fetch aggregated fields from the table: "menu" */
@@ -824,3 +837,119 @@ export type AdminLoginQueryVariables = Exact<{
 
 
 export type AdminLoginQuery = { __typename?: 'query_root', adminLogin?: { __typename?: 'AdminLoginOutput', accessToken: string } | null };
+
+export type CloudinarySignatureQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CloudinarySignatureQuery = { __typename?: 'query_root', cloudinarySignature?: { __typename?: 'CloudinarySignatureOutput', apiKey: string, cloudName: string, publicId: string, signature: string, timestamp: number } | null };
+
+
+export const AdimGetMeDocument = gql`
+    query AdimGetMe {
+  adminGetMe {
+    id
+    username
+  }
+}
+    `;
+
+/**
+ * __useAdimGetMeQuery__
+ *
+ * To run a query within a React component, call `useAdimGetMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdimGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdimGetMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAdimGetMeQuery(baseOptions?: Apollo.QueryHookOptions<AdimGetMeQuery, AdimGetMeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdimGetMeQuery, AdimGetMeQueryVariables>(AdimGetMeDocument, options);
+      }
+export function useAdimGetMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdimGetMeQuery, AdimGetMeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdimGetMeQuery, AdimGetMeQueryVariables>(AdimGetMeDocument, options);
+        }
+export type AdimGetMeQueryHookResult = ReturnType<typeof useAdimGetMeQuery>;
+export type AdimGetMeLazyQueryHookResult = ReturnType<typeof useAdimGetMeLazyQuery>;
+export type AdimGetMeQueryResult = Apollo.QueryResult<AdimGetMeQuery, AdimGetMeQueryVariables>;
+export const AdminLoginDocument = gql`
+    query AdminLogin($password: String!, $username: String!) {
+  adminLogin(admin: {password: $password, username: $username}) {
+    accessToken
+  }
+}
+    `;
+
+/**
+ * __useAdminLoginQuery__
+ *
+ * To run a query within a React component, call `useAdminLoginQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminLoginQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminLoginQuery({
+ *   variables: {
+ *      password: // value for 'password'
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useAdminLoginQuery(baseOptions: Apollo.QueryHookOptions<AdminLoginQuery, AdminLoginQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminLoginQuery, AdminLoginQueryVariables>(AdminLoginDocument, options);
+      }
+export function useAdminLoginLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminLoginQuery, AdminLoginQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminLoginQuery, AdminLoginQueryVariables>(AdminLoginDocument, options);
+        }
+export type AdminLoginQueryHookResult = ReturnType<typeof useAdminLoginQuery>;
+export type AdminLoginLazyQueryHookResult = ReturnType<typeof useAdminLoginLazyQuery>;
+export type AdminLoginQueryResult = Apollo.QueryResult<AdminLoginQuery, AdminLoginQueryVariables>;
+export const CloudinarySignatureDocument = gql`
+    query CloudinarySignature {
+  cloudinarySignature {
+    apiKey
+    cloudName
+    publicId
+    signature
+    timestamp
+  }
+}
+    `;
+
+/**
+ * __useCloudinarySignatureQuery__
+ *
+ * To run a query within a React component, call `useCloudinarySignatureQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCloudinarySignatureQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCloudinarySignatureQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCloudinarySignatureQuery(baseOptions?: Apollo.QueryHookOptions<CloudinarySignatureQuery, CloudinarySignatureQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CloudinarySignatureQuery, CloudinarySignatureQueryVariables>(CloudinarySignatureDocument, options);
+      }
+export function useCloudinarySignatureLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CloudinarySignatureQuery, CloudinarySignatureQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CloudinarySignatureQuery, CloudinarySignatureQueryVariables>(CloudinarySignatureDocument, options);
+        }
+export type CloudinarySignatureQueryHookResult = ReturnType<typeof useCloudinarySignatureQuery>;
+export type CloudinarySignatureLazyQueryHookResult = ReturnType<typeof useCloudinarySignatureLazyQuery>;
+export type CloudinarySignatureQueryResult = Apollo.QueryResult<CloudinarySignatureQuery, CloudinarySignatureQueryVariables>;
